@@ -2,10 +2,15 @@ package com.codewithproject.springsecurity.controller;
 
 import com.codewithproject.springsecurity.entities.Channel;
 import com.codewithproject.springsecurity.entities.Language;
+import com.codewithproject.springsecurity.entities.Question;
+import com.codewithproject.springsecurity.entities.Test;
+import com.codewithproject.springsecurity.entities.TestQuestion;
 import com.codewithproject.springsecurity.entities.User;
 import com.codewithproject.springsecurity.entities.Video;
 import com.codewithproject.springsecurity.services.impl.ChannelServiceImpl;
 import com.codewithproject.springsecurity.services.impl.LanguageServiceImpl;
+import com.codewithproject.springsecurity.services.impl.QuestionServiceImpl;
+import com.codewithproject.springsecurity.services.impl.TestServiceImpl;
 import com.codewithproject.springsecurity.services.impl.UserServiceImpl;
 import com.codewithproject.springsecurity.services.impl.VideoServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +36,12 @@ public class SeederController {
     private LanguageServiceImpl languageServiceImpl;
 
     @Autowired
+    private QuestionServiceImpl questionServiceImpl;
+
+    @Autowired
+    private TestServiceImpl testServiceImpl;
+
+    @Autowired
     private UserServiceImpl userServiceImpl;
 
     @Autowired
@@ -47,6 +58,21 @@ public class SeederController {
     @GetMapping("/languages")
     public List<Language> migrateLanguage(){
         return languageServiceImpl.seederLanguages();
+    }
+
+    @GetMapping("/questions")
+    public List<Question> migrateQuestion() {
+        return questionServiceImpl.seederQuestions();
+    }
+
+    @GetMapping("/tests")
+    public List<Test> migrateTest() {
+        return testServiceImpl.seederTests();
+    }
+
+    @GetMapping("/test-question")
+    public List<TestQuestion> migrateTestQuestion() {
+        return testServiceImpl.seederTestQuestion();
     }
 
     @GetMapping("/user")

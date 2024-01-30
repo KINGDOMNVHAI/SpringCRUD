@@ -2,7 +2,7 @@ package com.codewithproject.springsecurity.entities;
 
 import com.codewithproject.springsecurity.config.Constants;
 import com.codewithproject.springsecurity.dto.ChannelDto;
-import com.codewithproject.springsecurity.util.DateUtility;
+import com.codewithproject.springsecurity.util.DateUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -86,7 +86,7 @@ public class Channel {
         dto.setUrlChannel(this.getUrlChannel());
         dto.setUrlVideoPresent(this.getUrlVideoPresent());
         dto.setSubscribe(this.getSubscribe());
-        dto.setCreatedDateChannel(DateUtility.toDateString(this.getCreatedDateChannel(), Constants.FORMAT_YYYY_MM_DD));
+        dto.setCreatedDateChannel(DateUtil.toDateString(this.getCreatedDateChannel(), Constants.FORMAT_YYYY_MM_DD));
         dto.setThumbnailChannel(this.getThumbnailChannel());
         dto.setBannerChannel(this.getBannerChannel());
         dto.setWebsiteChannel(this.getWebsiteChannel());

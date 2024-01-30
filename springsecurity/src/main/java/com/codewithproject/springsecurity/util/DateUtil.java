@@ -7,14 +7,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class DateUtility {
+public class DateUtil {
 
     public static final long SECOND = 1000;
 
@@ -32,13 +31,13 @@ public class DateUtility {
 
     public static final String TIME_ZONE_SAIGON = "Asia/Saigon";
 
-    private DateUtility(){}
+    private DateUtil(){}
     public static Date getMinDate() {
-        return DateUtility.toDate(DateUtility.MIN_DATE);
+        return DateUtil.toDate(DateUtil.MIN_DATE);
     }
 
     public static Date getMaxDate() {
-        return DateUtility.toDate(DateUtility.MAX_DATE);
+        return DateUtil.toDate(DateUtil.MAX_DATE);
     }
 
     public static Date toDate(String dateStr) {
@@ -60,7 +59,7 @@ public class DateUtility {
         Object[] params = new Object[]{date};
         Calendar cal = new GregorianCalendar();
         cal.setTime(date);
-        format = DateUtility.DATE_FORMAT_EN_STR;
+        format = DateUtil.DATE_FORMAT_EN_STR;
         try {
             dateString = MessageFormat.format(new StringBuilder().append("{0,date,").append(format).append("}").toString(), params);
         } catch (Exception e) {

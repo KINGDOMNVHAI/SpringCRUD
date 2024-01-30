@@ -2,7 +2,7 @@ package com.codewithproject.springsecurity.dto;
 
 import com.codewithproject.springsecurity.config.Constants;
 import com.codewithproject.springsecurity.entities.Video;
-import com.codewithproject.springsecurity.util.DateUtility;
+import com.codewithproject.springsecurity.util.DateUtil;
 import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,7 +44,7 @@ public class VideoDto {
     public Video convertToEntity(String lang) {
         Video entity = new Video();
         entity.setIdVideo(this.getIdVideo());
-        entity.setCreatedDateVideo(DateUtility.toDate(this.getCreatedDateVideo()));
+        entity.setCreatedDateVideo(DateUtil.toDate(this.getCreatedDateVideo()));
         entity.setViews(this.getViews());
         if (this.getViews() == null) {
             entity.setViews(0);

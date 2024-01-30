@@ -3,7 +3,7 @@ package com.codewithproject.springsecurity.entities;
 import com.codewithproject.springsecurity.config.Constants;
 import com.codewithproject.springsecurity.dto.ChannelDto;
 import com.codewithproject.springsecurity.dto.CommunityDto;
-import com.codewithproject.springsecurity.util.DateUtility;
+import com.codewithproject.springsecurity.util.DateUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -46,7 +46,7 @@ public class Community {
         dto.setIdCom(this.idCom);
         dto.setTitleCom(this.titleCom);
         dto.setDescriptionCom(this.descriptionCom);
-        dto.setCreatedDateCom(DateUtility.toDateString(this.createdDateCom, Constants.FORMAT_YYYY_MM_DD));
+        dto.setCreatedDateCom(DateUtil.toDateString(this.createdDateCom, Constants.FORMAT_YYYY_MM_DD));
         dto.setIdChannel(this.idChannel);
     }
 }

@@ -1,5 +1,6 @@
 package com.codewithproject.springsecurity.entities;
 
+import com.codewithproject.springsecurity.dto.TestDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,4 +27,9 @@ public class Test {
 
     @Column(name = "title_test", nullable = false)
     private String titleTest;
+
+    public void convertToDto(TestDto dto, String lang) {
+        dto.setIdTest(this.getIdTest());
+        dto.setTitleTest(this.getTitleTest());
+    }
 }
