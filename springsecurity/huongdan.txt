@@ -1,0 +1,153 @@
+Spring Boot 3.1 With JWT
+https://www.youtube.com/playlist?list=PLgYFT7gUQL8HCIyTncupOEl8c6cgXAO4j
+
+Video 1: Understanding Spring Security Basics And Project Overview
+00:50
+Authentication and Authorization
+Authen là xác thực có phải bạn hay không.
+Author là ủy quyền, cho phép bạn truy cập vào những đâu.
+Role-based Auth
+Xác thực và ủy quyền dựa trên role, cấp độ.
+
+JWT in Spring Security
+
+
+
+Video 2: Project Setup, Database Connection And User Entity
+
+Tạo project trên https://start.spring.io/
+
+Phiên bản 3.1
+Jar
+Dependencies: Spring Web, MySQL Driver, Spring Data JPA, Lombook.
+
+Tạo database spring_security
+
+spring.datasource.url=jdbc:mysql://localhost:3333/spring_security
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.properties.hibernate.format_sql=false
+
+Tạo entity User, enum Role
+
+Start project được là xong video 2.
+
+
+
+Video 3: User Details And JWT Service
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+
+import org.springframework.security.core.userdetails.UserDetails;
+
+User implements UserDetails
+
+@Override
+public Collection<? extends GrantedAuthority> getAuthorities() {
+    return List.of(new SimpleGrantedAuthority(role.name()));
+}
+
+getUsername() return email;
+isAccountNonExpired() return true;
+isAccountNonLocked() return true;
+isCredentialsNonExpired() return true;
+isEnabled() return true;
+
+
+Tạo
+interface JWTService
+class JWTServiceImpl
+
+
+
+
+
+Video 4: Authentication Filter, User Details Service And is Token Expired
+
+Tạo JwtAuthenticationFilter trong config
+interface UserService
+class UserServiceImpl implements UserService
+
+pom.xml
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+</dependency>
+
+Video 5: Security Configuration
+
+Tạo SecurityConfiguration trong config
+
+Video 6: Signup API & Admin Account Creation
+
+Tạo dto -> SignUpRequest
+
+AuthenticationServiceImpl
+
+SpringsecurityApplication implements CommandLineRunner
+
+Tạo API đăng ký: http://localhost:8080/api/v1/auth/signup
+{
+    "firstname":"admin",
+    "secondname":"admin",
+    "email":"admin@gmail.com",
+    "password":"admin"
+}
+
+Video 7: Login API With JWT And Refresh Token
+
+Tạo trong dto
+SignInRequest
+JwtAuthenticationResponse
+
+Video 8: Refresh Token API & Role Protected Endpoints
+
+dto -> RefreshTokenRequest
+
+
+.getBytes(StandardCharsets.UTF_8)
+
+===========================================
+
+
+Apache KAFKA Tutorial | KAFKA Crash Course | Spring Boot
+https://www.youtube.com/watch?v=tU_37niRh4U
+
+Microservice
+Each service have migrate
+auth-service: manage API auth, table users, history_login (lịch sử đăng nhập)
+
+video-service: table videos, channels, community.
+
+post-service: table post, category, post_category
+
+question-service: table test, question
+
+
+
+============
+Cách fix Refresh Token:
+https://www.youtube.com/watch?v=EsVybSJr7zU
+https://github.com/ali-bouali/spring-boot-3-jwt-security
