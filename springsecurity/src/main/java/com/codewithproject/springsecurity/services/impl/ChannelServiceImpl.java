@@ -4,7 +4,6 @@ import com.codewithproject.springsecurity.config.Constants;
 import com.codewithproject.springsecurity.dto.ChannelDto;
 import com.codewithproject.springsecurity.dto.CommunityDto;
 import com.codewithproject.springsecurity.entities.Channel;
-import com.codewithproject.springsecurity.entities.Community;
 import com.codewithproject.springsecurity.repository.ChannelRepository;
 import com.codewithproject.springsecurity.repository.CommunityRepository;
 import com.codewithproject.springsecurity.seeder.ChannelSeeder;

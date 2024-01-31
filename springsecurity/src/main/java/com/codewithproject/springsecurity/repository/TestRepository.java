@@ -18,8 +18,8 @@ public interface TestRepository extends JpaRepository<Test, Long> {
     @Query(value = "TRUNCATE TABLE tests", nativeQuery = true)
     void truncateTable();
 
-    @Query(value = "SELECT t.* " +
-            " FROM tests t " +
-            " WHERE t.id_test = :idTest", nativeQuery = true)
+    @Query(value = "SELECT t.* "
+            + " FROM tests t "
+            + " WHERE t.id_test = :idTest", nativeQuery = true)
     Optional<Test> getTestById(Integer idTest);
 }

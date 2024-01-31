@@ -24,8 +24,11 @@ public class Answer {
     @Column(name = "id_answer", nullable = false)
     private Long idAnswer;
 
-    @Column(name = "content_answer")
-    private String contentAnswer;
+    @Column(name = "content_answer_vi")
+    private String contentAnswerVI;
+
+    @Column(name = "content_answer_en")
+    private String contentAnswerEN;
 
     @Column(name = "id_question")
     private Long idQuestion;

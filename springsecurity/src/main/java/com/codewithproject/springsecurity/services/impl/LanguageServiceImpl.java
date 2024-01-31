@@ -2,7 +2,6 @@ package com.codewithproject.springsecurity.services.impl;
 
 import com.codewithproject.springsecurity.entities.Language;
 import com.codewithproject.springsecurity.repository.LanguageRepository;
-import com.codewithproject.springsecurity.seeder.ChannelSeeder;
 import com.codewithproject.springsecurity.seeder.LanguageSeeder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -18,13 +18,13 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
     @Query(value = "TRUNCATE TABLE videos", nativeQuery = true)
     void truncateTable();
 
-    @Query(value = "SELECT v.* " +
-            " FROM videos v " +
-            " WHERE v.id_video = :idVideo", nativeQuery = true)
+    @Query(value = "SELECT v.* "
+            + " FROM videos v "
+            + " WHERE v.id_video = :idVideo", nativeQuery = true)
     Video getVideoById(String idVideo);
 
-    @Query(value = "SELECT v.* " +
-            " FROM videos v " +
-            " WHERE v.id_channel = :idChannel", nativeQuery = true)
+    @Query(value = "SELECT v.* "
+            + " FROM videos v "
+            + " WHERE v.id_channel = :idChannel", nativeQuery = true)
     List<Video> getListVideoByIdChannel(String idChannel);
 }

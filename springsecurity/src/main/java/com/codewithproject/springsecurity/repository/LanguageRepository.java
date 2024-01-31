@@ -17,13 +17,13 @@ public interface LanguageRepository extends JpaRepository<Language, Long> {
     @Query(value = "TRUNCATE TABLE languages", nativeQuery = true)
     void truncateTable();
 
-    @Query(value = "SELECT l.* " +
-            " FROM languages l " +
-            " WHERE l.id_lang = :idLang", nativeQuery = true)
+    @Query(value = "SELECT l.* "
+            + " FROM languages l "
+            + " WHERE l.id_lang = :idLang", nativeQuery = true)
     Optional<Language> getLangById(Integer idLang);
 
-    @Query(value = "SELECT l.* " +
-            " FROM languages l " +
-            " WHERE l.code_lang = :codeLang", nativeQuery = true)
+    @Query(value = "SELECT l.* "
+            + " FROM languages l "
+            + " WHERE l.code_lang = :codeLang", nativeQuery = true)
     Optional<Language> getLangByCode(String codeLang);
 }

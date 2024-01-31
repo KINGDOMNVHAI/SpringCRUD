@@ -3,7 +3,6 @@ package com.codewithproject.springsecurity.controller;
 import com.codewithproject.springsecurity.config.Constants;
 import com.codewithproject.springsecurity.dto.ChannelDto;
 import com.codewithproject.springsecurity.dto.CommunityDto;
-import com.codewithproject.springsecurity.entities.Video;
 import com.codewithproject.springsecurity.services.impl.ChannelServiceImpl;
 import com.codewithproject.springsecurity.services.impl.UserServiceImpl;
 import com.codewithproject.springsecurity.services.impl.VideoServiceImpl;
@@ -11,14 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 //@CrossOrigin(origins = "http://localhost:8080")
 @RestController

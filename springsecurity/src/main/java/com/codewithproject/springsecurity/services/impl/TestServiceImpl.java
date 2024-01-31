@@ -1,10 +1,9 @@
 package com.codewithproject.springsecurity.services.impl;
 
-import com.codewithproject.springsecurity.config.Constants;
 import com.codewithproject.springsecurity.dto.AnswerQuestionDto;
 import com.codewithproject.springsecurity.dto.QuestionDto;
-import com.codewithproject.springsecurity.dto.TestDto;
 import com.codewithproject.springsecurity.dto.TestQuestionDto;
+import com.codewithproject.springsecurity.entities.Answer;
 import com.codewithproject.springsecurity.entities.Test;
 import com.codewithproject.springsecurity.entities.TestQuestion;
 import com.codewithproject.springsecurity.repository.TestRepository;
@@ -15,14 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class TestServiceImpl {
+
+    @Autowired
+    private AnswerServiceImpl answerServiceImpl;
 
     @Autowired
     private TestRepository testRepo;
@@ -54,25 +54,30 @@ public class TestServiceImpl {
             result.setTitleTest(testInfo.getTitleTest());
 
             List<QuestionDto> questionDtos = questionServiceImpl.getListQuestionByIdTest(idTest);
-            result.setQuestions(questionDtos);
 
             if (!questionDtos.isEmpty()) {
-                List<AnswerQuestionDto> answers = questionDtos.stream().map(q -> {
-                    AnswerQuestionDto dto = new AnswerQuestionDto();
-
-                    // get list String
-                    String listAnswerStr = q.getListAnswer();
-                    List<String> listAnswer = ArrayUtil.stringToIntArray(listAnswerStr);
+                for (QuestionDto q : questionDtos) {
+                    // get list answers of question
+                    List<String> listStrAnswer = ArrayUtil.stringToIntArray(q.getListAnswer());
+//                    Collections.shuffle(listStrAnswer);
 
                     // String to Integer
-
+                    List<Integer> listIntAnswer = listStrAnswer.stream().map(Integer::parseInt).toList();
 
                     // Get answer
+                    List<AnswerQuestionDto> answers = new ArrayList<>();
+                    List<Answer> listAnswer = answerServiceImpl.getListAnswerByListId(listIntAnswer);
+                    List<String> listAlphabet = ArrayUtil.ARRAY_ALPHABET;
 
-
-                    return dto;
-
-                }).toList();
+                    for (int i = 0; i < listAnswer.size(); i++) {
+                        AnswerQuestionDto dto = new AnswerQuestionDto();
+                        dto.setNumberAnswerInTest(listAlphabet.get(i));
+                        dto.setContentAnswer(listAnswer.get(i).getContentAnswerVI());
+                        answers.add(dto);
+                    }
+                    q.setAnswers(answers);
+                }
+                result.setQuestions(questionDtos);
             }
 
             return result;

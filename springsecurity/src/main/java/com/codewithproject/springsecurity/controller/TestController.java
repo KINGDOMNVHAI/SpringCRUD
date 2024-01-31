@@ -1,6 +1,5 @@
 package com.codewithproject.springsecurity.controller;
 
-import com.codewithproject.springsecurity.dto.TestDto;
 import com.codewithproject.springsecurity.dto.TestQuestionDto;
 import com.codewithproject.springsecurity.services.impl.TestServiceImpl;
 import lombok.RequiredArgsConstructor;

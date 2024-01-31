@@ -1,14 +1,9 @@
 package com.codewithproject.springsecurity.services.impl;
 
 import com.codewithproject.springsecurity.config.Constants;
-import com.codewithproject.springsecurity.dto.ChannelDto;
 import com.codewithproject.springsecurity.dto.QuestionDto;
-import com.codewithproject.springsecurity.dto.TestDto;
-import com.codewithproject.springsecurity.entities.Channel;
 import com.codewithproject.springsecurity.entities.Question;
-import com.codewithproject.springsecurity.entities.Test;
 import com.codewithproject.springsecurity.repository.QuestionRepository;
-import com.codewithproject.springsecurity.repository.TestRepository;
 import com.codewithproject.springsecurity.seeder.TestQuestionAnswerSeeder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

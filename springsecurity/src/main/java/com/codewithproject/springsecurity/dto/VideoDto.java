@@ -3,11 +3,8 @@ package com.codewithproject.springsecurity.dto;
 import com.codewithproject.springsecurity.config.Constants;
 import com.codewithproject.springsecurity.entities.Video;
 import com.codewithproject.springsecurity.util.DateUtil;
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter
