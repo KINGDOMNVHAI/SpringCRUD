@@ -32,6 +32,12 @@ public class Question {
     @Column(name = "title_question_en", nullable = false)
     private String titleQuestionEN;
 
+    @Column(name = "explain_question_vi")
+    private String explainQuestionVI;
+
+    @Column(name = "explain_question_en")
+    private String explainQuestionEN;
+
     @Column(name = "list_id_answer")
     private String listAnswer; // Ex: 1,7,8,10
 
