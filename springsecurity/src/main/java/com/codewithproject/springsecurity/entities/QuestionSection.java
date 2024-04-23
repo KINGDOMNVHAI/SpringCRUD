@@ -1,5 +1,6 @@
 package com.codewithproject.springsecurity.entities;
 
+import com.codewithproject.springsecurity.dto.entitydto.QuestionSectionDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,17 +17,19 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "test_question")
-public class TestQuestion {
+@Table(name = "question_section")
+public class QuestionSection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_test_question", nullable = false)
-    private Long idTestQuestion;
+    @Column(name = "id_qs", nullable = false)
+    private Integer idQuestionSection;
 
-    @Column(name = "id_test", nullable = false)
-    private Long idTest;
+    @Column(name = "title_qs", nullable = false)
+    private String titleQS;
 
-    @Column(name = "id_question", nullable = false)
-    private Long idQuestion;
+    public void convertToDto(QuestionSectionDto dto, String lang) {
+        dto.setIdQuestionSection(this.idQuestionSection);
+        dto.setTitleQS(this.titleQS);
+    }
 }

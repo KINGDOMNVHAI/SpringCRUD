@@ -1,7 +1,7 @@
 package com.codewithproject.springsecurity.services.impl;
 
 import com.codewithproject.springsecurity.config.Constants;
-import com.codewithproject.springsecurity.dto.QuestionDto;
+import com.codewithproject.springsecurity.dto.entitydto.QuestionDto;
 import com.codewithproject.springsecurity.entities.Question;
 import com.codewithproject.springsecurity.repository.QuestionRepository;
 import com.codewithproject.springsecurity.seeder.TestQuestionAnswerSeeder;
@@ -23,15 +23,18 @@ public class QuestionServiceImpl {
     @Autowired
     public TestQuestionAnswerSeeder testSeeder;
 
-    public List<Question> seederQuestions() {
-        List<Question> result = new ArrayList<>();
-        result = testSeeder.seederQuestions();
-        return result;
+    public void truncateQuestions() {
+        questionRepo.truncateTable();
     }
 
-    public List<QuestionDto> getListQuestionByIdTest(Integer idTest) {
+    public List<Question> seederQuestions() {
+        truncateQuestions();
+        return testSeeder.seederQuestions();
+    }
+
+    public List<QuestionDto> getListQuestionByIdTest(String urlTest) {
         List<QuestionDto> result = new ArrayList<>();
-        List<Question> listQuest = questionRepo.getQuestionByIdTest(idTest);
+        List<Question> listQuest = questionRepo.getQuestionByIdTest(urlTest);
         if (!listQuest.isEmpty()) {
             result = listQuest.stream().map(q -> {
                 QuestionDto dto = new QuestionDto();

@@ -1,5 +1,6 @@
 package com.codewithproject.springsecurity.dto;
 
+import com.codewithproject.springsecurity.dto.entitydto.QuestionDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public class TestQuestionDto {
 
     // TestDto
-    private Long idTest;
+    private Integer idTest;
 
     private String titleTest;
 

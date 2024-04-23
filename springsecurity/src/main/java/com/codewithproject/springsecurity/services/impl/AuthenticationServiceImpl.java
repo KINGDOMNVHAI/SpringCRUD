@@ -1,5 +1,6 @@
 package com.codewithproject.springsecurity.services.impl;
 
+import com.codewithproject.springsecurity.config.MessageConstants;
 import com.codewithproject.springsecurity.dto.JwtAuthenticationResponse;
 import com.codewithproject.springsecurity.dto.RefreshTokenRequest;
 import com.codewithproject.springsecurity.dto.SignInRequest;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -46,6 +48,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public JwtAuthenticationResponse signin(SignInRequest signInRequest) {
+        System.out.println("pass " + signInRequest.getPassword());
+        String jwt = null;
+        String refreshToken = null;
+        String message = MessageConstants.INVALID_EMAIL_PASSWORD;
+
+        var user = userRepository.findByEmail(signInRequest.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
+        Optional<User> checkUser = userRepository.findByEmailAndPassword(signInRequest.getEmail(), signInRequest.getPassword());
+        if (checkUser.isPresent()) {
+            jwt = jwtService.generateToken(user);
+            refreshToken = jwtService.generateRefreshToken(new HashMap<>(), user);
+            message = MessageConstants.LOGIN_SUCCESS;
+        }
+        JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse();
+        jwtAuthenticationResponse.setToken(jwt);
+        jwtAuthenticationResponse.setRefreshToken(refreshToken);
+        jwtAuthenticationResponse.setMessage(message);
 
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -53,13 +71,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         } catch (Exception ex) {
             System.out.println("Error");
         }
-        var user = userRepository.findByEmail(signInRequest.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
-        var jwt = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(new HashMap<>(), user);
-
-        JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse();
-        jwtAuthenticationResponse.setToken(jwt);
-        jwtAuthenticationResponse.setRefreshToken(refreshToken);
         return jwtAuthenticationResponse;
     }
 
@@ -68,7 +79,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = userRepository.findByEmail(userEmail).orElseThrow();
         if (jwtService.isTokenValid(refreshTokenRequest.getToken(), user)) {
             var jwt = jwtService.generateToken(user);
-
             JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse();
             jwtAuthenticationResponse.setToken(jwt);
             jwtAuthenticationResponse.setRefreshToken(refreshTokenRequest.getToken());

@@ -20,6 +20,18 @@ public interface ChannelRepository extends JpaRepository<Channel, String> {
     @Query(value = "SELECT c.id_channel FROM channels c", nativeQuery = true)
     List<String> getAllIdChannels();
 
-    @Query(value = "SELECT c.* FROM channels c ORDER BY c.subscribe DESC", nativeQuery = true)
+    @Query(value = "SELECT c.* "
+            + "FROM channels c "
+            + "WHERE c.enable_channel != 0 "
+            + "ORDER BY c.subscribe DESC", nativeQuery = true)
     List<Channel> getListChannels();
+
+    @Query(value = "SELECT c.* "
+            + "FROM channels c "
+            + "WHERE c.enable_channel != 0 "
+            + "AND c.name_channel_vi LIKE %:keyword% "
+            + "OR c.name_channel_en LIKE %:keyword% "
+            + "OR c.name_channel_jp LIKE %:keyword% "
+            + "ORDER BY c.subscribe DESC", nativeQuery = true)
+    List<Channel> searchListVideo(String keyword);
 }

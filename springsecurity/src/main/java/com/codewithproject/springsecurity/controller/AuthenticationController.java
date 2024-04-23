@@ -9,13 +9,15 @@ import com.codewithproject.springsecurity.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+//@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/v1/public")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
@@ -24,6 +26,8 @@ public class AuthenticationController {
 
     @PostMapping("/signup")
     public ResponseEntity<User> signup(@RequestBody SignUpRequest signUpRequest) {
+        System.out.println(signUpRequest.getEmail());
+        System.out.println(signUpRequest.getPassword());
         return ResponseEntity.ok(authenticationService.signup(signUpRequest));
     }
 

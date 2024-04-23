@@ -22,4 +22,9 @@ public interface TestRepository extends JpaRepository<Test, Long> {
             + " FROM tests t "
             + " WHERE t.id_test = :idTest", nativeQuery = true)
     Optional<Test> getTestById(Integer idTest);
+
+    @Query(value = "SELECT t.* "
+            + " FROM tests t "
+            + " WHERE t.url_test = :urlTest", nativeQuery = true)
+    Optional<Test> getTestByURL(String urlTest);
 }

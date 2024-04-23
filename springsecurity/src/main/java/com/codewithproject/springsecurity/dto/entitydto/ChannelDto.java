@@ -1,4 +1,4 @@
-package com.codewithproject.springsecurity.dto;
+package com.codewithproject.springsecurity.dto.entitydto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +24,8 @@ public class ChannelDto {
     private String thumbnailChannel;
 
     private String bannerChannel;
+
+    private boolean lockUpdate;
 
     private String websiteChannel;
 

@@ -3,6 +3,7 @@ package com.codewithproject.springsecurity.services.impl;
 import com.codewithproject.springsecurity.entities.Language;
 import com.codewithproject.springsecurity.repository.LanguageRepository;
 import com.codewithproject.springsecurity.seeder.LanguageSeeder;
+import com.codewithproject.springsecurity.services.LanguageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class LanguageServiceImpl {
+public class LanguageServiceImpl implements LanguageService {
 
     @Autowired
     private LanguageRepository langRepo;
@@ -27,9 +28,7 @@ public class LanguageServiceImpl {
 
     public List<Language> seederLanguages() {
         truncateLanguages();
-        List<Language> result = new ArrayList<>();
-        result = langSeeder.seederLanguages();
-        return result;
+        return langSeeder.seederLanguages();
     }
 
     public Language getLangByCode(String codeLang) {

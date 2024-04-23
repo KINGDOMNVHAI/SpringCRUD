@@ -1,6 +1,6 @@
 package com.codewithproject.springsecurity.util;
 
-import com.codewithproject.springsecurity.dto.VideoDto;
+import com.codewithproject.springsecurity.dto.entitydto.VideoDto;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.DeserializationFeature;

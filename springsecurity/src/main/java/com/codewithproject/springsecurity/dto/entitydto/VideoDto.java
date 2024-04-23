@@ -1,4 +1,4 @@
-package com.codewithproject.springsecurity.dto;
+package com.codewithproject.springsecurity.dto.entitydto;
 
 import com.codewithproject.springsecurity.config.Constants;
 import com.codewithproject.springsecurity.entities.Video;

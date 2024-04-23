@@ -42,6 +42,7 @@ public class ChannelSeeder {
             channelKD.setSubscribe(3190);
             channelKD.setThumbnailChannel("kingdom-nvhai-channel-thumbnail.jpg");
             channelKD.setBannerChannel("kingdom-nvhai-banner.jpg");
+            channelKD.setEnableChannel(true);
             channelRepo.save(channelKD);
             result.add(channelKD);
 
@@ -55,6 +56,7 @@ public class ChannelSeeder {
             channelNiji.setSubscribe(115000);
             channelNiji.setThumbnailChannel("niji-no-conquistador-channel-thumbnail.jpg");
             channelNiji.setBannerChannel("niji-no-conquistador-banner.jpg");
+            channelNiji.setEnableChannel(true);
             channelRepo.save(channelNiji);
             result.add(channelNiji);
 

@@ -2,19 +2,16 @@ package com.codewithproject.springsecurity.seeder;
 
 import com.codewithproject.springsecurity.entities.Answer;
 import com.codewithproject.springsecurity.entities.Question;
-import com.codewithproject.springsecurity.entities.Test;
-import com.codewithproject.springsecurity.entities.TestQuestion;
 import com.codewithproject.springsecurity.enums.TypeQuestion;
 import com.codewithproject.springsecurity.repository.AnswerRepository;
+import com.codewithproject.springsecurity.repository.ExamRepository;
 import com.codewithproject.springsecurity.repository.QuestionRepository;
-import com.codewithproject.springsecurity.repository.TestQuestionRepository;
 import com.codewithproject.springsecurity.repository.TestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Component
 public class TestQuestionAnswerSeeder {
@@ -29,30 +26,17 @@ public class TestQuestionAnswerSeeder {
     public TestRepository testRepo;
 
     @Autowired
-    public TestQuestionRepository testQuestionRepo;
-
-    public List<Test> seederTests() {
-        Random r = new Random();
-        List<Test> result = new ArrayList<>();
-        try {
-            Test test1 = new Test();
-            test1.setTitleTest("Java Test: Beginner 1");
-            testRepo.save(test1);
-            result.add(test1);
-        } catch (Exception ex) {
-            return result;
-        }
-        return result;
-    }
+    public ExamRepository examRepo;
 
     public List<Question> seederQuestions() {
         List<Question> result = new ArrayList<>();
         try {
             int idQuestion1 = 1;
             Question question1 = new Question();
-            question1.setTitleQuestionVI("Sự khác nhau giữa @RestController và @Controller là gì?");
-            question1.setTitleQuestionEN("What is difference between @RestController and @Controller?");
-            question1.setListAnswer("1,2,3,4");
+            question1.setContentQuestionVI("Sự khác nhau giữa @RestController và @Controller là gì?");
+            question1.setContentQuestionEN("What is difference between @RestController and @Controller?");
+            question1.setListIdAnswer("1,2,3,4");
+            question1.setUrlTest("java-beginner-1");
             question1.setTypeQuestion(TypeQuestion.MULTI_CHOICE_RADIO.getValue());
             questionRepo.save(question1);
             result.add(question1);
@@ -87,9 +71,10 @@ public class TestQuestionAnswerSeeder {
 
             int idQuestion2 = 2;
             Question question2 = new Question();
-            question2.setTitleQuestionVI("Collections.shuffle() là gì?");
-            question2.setTitleQuestionEN("What is Collections.shuffle()?");
-            question2.setListAnswer("5,6,7,8");
+            question2.setContentQuestionVI("Collections.shuffle() là gì?");
+            question2.setContentQuestionEN("What is Collections.shuffle()?");
+            question2.setListIdAnswer("5,6,7,8");
+            question2.setUrlTest("java-beginner-1");
             question2.setTypeQuestion(TypeQuestion.MULTI_CHOICE_RADIO.getValue());
             questionRepo.save(question2);
             result.add(question2);
@@ -122,27 +107,65 @@ public class TestQuestionAnswerSeeder {
             answer8.setIdQuestion((long) idQuestion2);
             answerRepo.save(answer8);
 
-        } catch (Exception ex) {
-            return result;
-        }
-        return result;
-    }
+            int idQuestion3 = 3;
+            Question question3 = new Question();
+            question3.setContentQuestionVI("Regex: [^\\sa-zA-Z1-9]\n" +
+                    "String: Kujira2024@\n" +
+                    "Chọn đáp án đúng.");
+            question3.setContentQuestionEN("Regex: [^\\sa-zA-Z1-9]\n" +
+                    "String: Kujira2024@\n" +
+                    "Choose correct answer.");
+            question3.setExplainQuestionVI("Kết quả trùng khớp: 0 và @");
+            question3.setExplainQuestionEN("Matcher: 0 and @");
+            question3.setListIdAnswer("9,10");
+            question3.setUrlTest("java-beginner-1");
+            question3.setTypeQuestion(TypeQuestion.MULTI_CHOICE_RADIO.getValue());
+            questionRepo.save(question3);
+            result.add(question3);
 
-    public List<TestQuestion> seederTestQuestion() {
-        List<TestQuestion> result = new ArrayList<>();
-        try {
-            int idTest1 = 1;
-            TestQuestion testQuestion1 = new TestQuestion();
-            testQuestion1.setIdTest((long) idTest1);
-            testQuestion1.setIdQuestion((long) 1);
-            testQuestionRepo.save(testQuestion1);
-            result.add(testQuestion1);
+            Answer answer9 = new Answer();
+            answer9.setContentAnswerVI("1 kết quả trùng khớp");
+            answer9.setContentAnswerEN("1 match");
+            answer9.setResultQuestion(false);
+            answer9.setIdQuestion((long) idQuestion3);
+            answerRepo.save(answer9);
 
-            TestQuestion testQuestion2 = new TestQuestion();
-            testQuestion2.setIdTest((long) idTest1);
-            testQuestion2.setIdQuestion((long) 2);
-            testQuestionRepo.save(testQuestion2);
-            result.add(testQuestion2);
+            Answer answer10 = new Answer();
+            answer10.setContentAnswerVI("2 kết quả trùng khớp");
+            answer10.setContentAnswerEN("2 matches");
+            answer10.setResultQuestion(true);
+            answer10.setIdQuestion((long) idQuestion3);
+            answerRepo.save(answer10);
+
+            int idQuestion4 = 4;
+            Question question4 = new Question();
+            question4.setContentQuestionVI("String a = \"\";\n" +
+                    "System.out.println(a.length);\n" +
+                    "Chọn đáp án đúng.");
+            question4.setContentQuestionEN("String a = \"\";\n" +
+                    "System.out.println(a.length);\n" +
+                    "Choose correct answer.");
+            question4.setExplainQuestionVI("a không phải chuỗi rỗng");
+            question4.setExplainQuestionEN("a is not null");
+            question4.setListIdAnswer("11,12");
+            question4.setUrlTest("java-beginner-1");
+            question4.setTypeQuestion(TypeQuestion.MULTI_CHOICE_RADIO.getValue());
+            questionRepo.save(question4);
+            result.add(question4);
+
+            Answer answer11 = new Answer();
+            answer11.setContentAnswerVI("null");
+            answer11.setContentAnswerEN("null");
+            answer11.setResultQuestion(false);
+            answer11.setIdQuestion((long) idQuestion4);
+            answerRepo.save(answer11);
+
+            Answer answer12 = new Answer();
+            answer12.setContentAnswerVI("0");
+            answer12.setContentAnswerEN("0");
+            answer12.setResultQuestion(true);
+            answer12.setIdQuestion((long) idQuestion4);
+            answerRepo.save(answer12);
 
         } catch (Exception ex) {
             return result;

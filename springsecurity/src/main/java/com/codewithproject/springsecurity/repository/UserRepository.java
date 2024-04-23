@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -20,5 +21,16 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String username);
 
+    @Query(value = "SELECT id, email, firstname, lastname, role, username, password "
+            + " FROM user "
+            + " WHERE email = :email "
+            + " AND password = :password", nativeQuery = true)
+    Optional<User> findByEmailAndPassword(String email, String password);
+
     User findByRole(Role role);
+
+    @Query(value = "SELECT id, email, firstname, lastname, role, username, password "
+            + " FROM user "
+            + " WHERE role = :role", nativeQuery = true)
+    List<User> getListByRole(Role role);
 }

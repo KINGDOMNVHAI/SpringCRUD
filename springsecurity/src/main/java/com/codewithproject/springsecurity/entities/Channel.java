@@ -1,7 +1,7 @@
 package com.codewithproject.springsecurity.entities;
 
 import com.codewithproject.springsecurity.config.Constants;
-import com.codewithproject.springsecurity.dto.ChannelDto;
+import com.codewithproject.springsecurity.dto.entitydto.ChannelDto;
 import com.codewithproject.springsecurity.util.DateUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,13 +42,13 @@ public class Channel {
     @Column(name = "url_video_present")
     private String urlVideoPresent;
 
-    @Column(name = "description_channel_vi")
+    @Column(name = "description_channel_vi", columnDefinition = "TEXT")
     private String descriptionChannelVI;
 
-    @Column(name = "description_channel_en")
+    @Column(name = "description_channel_en", columnDefinition = "TEXT")
     private String descriptionChannelEN;
 
-    @Column(name = "description_channel_jp")
+    @Column(name = "description_channel_jp", columnDefinition = "TEXT")
     private String descriptionChannelJP;
 
     @Column(name = "created_date_channel")
@@ -75,6 +75,9 @@ public class Channel {
     @Column(name = "enable_channel")
     private boolean enableChannel;
 
+    @Column(name = "lock_update")
+    private boolean lockUpdate; // lock update
+
     @Column(name = "vtuber")
     private boolean vtuber;
 
@@ -89,6 +92,7 @@ public class Channel {
         dto.setCreatedDateChannel(DateUtil.toDateString(this.getCreatedDateChannel(), Constants.FORMAT_YYYY_MM_DD));
         dto.setThumbnailChannel(this.getThumbnailChannel());
         dto.setBannerChannel(this.getBannerChannel());
+        dto.setLockUpdate(this.lockUpdate);
         dto.setWebsiteChannel(this.getWebsiteChannel());
         dto.setFacebookChannel(this.getFacebookChannel());
         dto.setTwitterChannel(this.getTwitterChannel());

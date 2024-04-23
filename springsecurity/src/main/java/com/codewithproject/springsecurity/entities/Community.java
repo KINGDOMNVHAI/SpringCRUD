@@ -1,7 +1,6 @@
 package com.codewithproject.springsecurity.entities;
 
 import com.codewithproject.springsecurity.config.Constants;
-import com.codewithproject.springsecurity.dto.ChannelDto;
 import com.codewithproject.springsecurity.dto.CommunityDto;
 import com.codewithproject.springsecurity.util.DateUtil;
 import jakarta.persistence.Column;

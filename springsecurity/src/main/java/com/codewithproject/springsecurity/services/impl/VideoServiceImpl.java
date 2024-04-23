@@ -1,8 +1,7 @@
 package com.codewithproject.springsecurity.services.impl;
 
 import com.codewithproject.springsecurity.config.Constants;
-import com.codewithproject.springsecurity.dto.CommunityDto;
-import com.codewithproject.springsecurity.dto.VideoDto;
+import com.codewithproject.springsecurity.dto.entitydto.VideoDto;
 import com.codewithproject.springsecurity.entities.Video;
 import com.codewithproject.springsecurity.repository.VideoRepository;
 import com.codewithproject.springsecurity.seeder.VideoSeeder;
@@ -13,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import static com.codewithproject.springsecurity.config.ParamConstants.PARAM_KEYWORD;
 
 @Service
 @RequiredArgsConstructor
@@ -25,9 +27,7 @@ public class VideoServiceImpl implements VideoService {
     public VideoSeeder videoSeeder;
 
     public List<Video> seederVideos() {
-        List<Video> result = new ArrayList<>();
-        result = videoSeeder.seederVideos();
-        return result;
+        return videoSeeder.seederVideos();
     }
 
     public VideoDto getVideo(String idVideo) {

@@ -1,6 +1,6 @@
 package com.codewithproject.springsecurity.controller;
 
-import com.codewithproject.springsecurity.dto.VideoDto;
+import com.codewithproject.springsecurity.dto.entitydto.VideoDto;
 import com.codewithproject.springsecurity.services.impl.VideoServiceImpl;
 import com.codewithproject.springsecurity.util.JSonUtil;
 import com.google.gson.Gson;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/auth/video")
+@RequestMapping("/api/v1/public/video")
 @RequiredArgsConstructor
 public class VideoController {
 
@@ -50,4 +50,10 @@ public class VideoController {
         }
         return video;
     }
+
+//    @GetMapping("/welcome-client")
+//    public int greetMessage() {
+//        String a = "";
+//        return a.length();
+//    }
 }

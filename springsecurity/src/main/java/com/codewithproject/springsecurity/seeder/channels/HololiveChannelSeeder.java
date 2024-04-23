@@ -31,6 +31,7 @@ public class HololiveChannelSeeder {
             channelTanigox.setBannerChannel("tanigox-channel-banner.jpg");
             channelTanigox.setVtuber(true);
             channelTanigox.setHololive(true);
+            channelTanigox.setEnableChannel(true);
             channelRepo.save(channelTanigox);
             result.add(channelTanigox);
 
@@ -46,6 +47,7 @@ public class HololiveChannelSeeder {
             channelHololive.setBannerChannel("hololive-channel-banner.jpg");
             channelHololive.setVtuber(true);
             channelHololive.setHololive(true);
+            channelHololive.setEnableChannel(true);
             channelRepo.save(channelHololive);
             result.add(channelHololive);
 
@@ -64,6 +66,7 @@ public class HololiveChannelSeeder {
             channelSora.setTwitterChannel("https://twitter.com/tokino_sora");
             channelSora.setVtuber(true);
             channelSora.setHololive(true);
+            channelSora.setEnableChannel(true);
             channelRepo.save(channelSora);
             result.add(channelSora);
 
@@ -80,6 +83,7 @@ public class HololiveChannelSeeder {
             channelSora.setTwitterChannel("https://twitter.com/AZKi_VDiVA/");
             channelAZKi.setVtuber(true);
             channelAZKi.setHololive(true);
+            channelAZKi.setEnableChannel(true);
             channelRepo.save(channelAZKi);
             result.add(channelAZKi);
 
@@ -96,6 +100,7 @@ public class HololiveChannelSeeder {
             channelSora.setTwitterChannel("https://twitter.com/suisei_hosimati");
             channelSuisei.setVtuber(true);
             channelSuisei.setHololive(true);
+            channelSuisei.setEnableChannel(true);
             channelRepo.save(channelSuisei);
             result.add(channelSuisei);
 
@@ -111,6 +116,7 @@ public class HololiveChannelSeeder {
             channelMiko.setBannerChannel("miko-channel-banner.jpg");
             channelMiko.setVtuber(true);
             channelMiko.setHololive(true);
+            channelMiko.setEnableChannel(true);
             channelRepo.save(channelMiko);
             result.add(channelMiko);
 
@@ -126,6 +132,7 @@ public class HololiveChannelSeeder {
             channelRoboco.setBannerChannel("roboco-channel-banner.jpg");
             channelRoboco.setVtuber(true);
             channelRoboco.setHololive(true);
+            channelRoboco.setEnableChannel(true);
             channelRepo.save(channelRoboco);
             result.add(channelRoboco);
 
@@ -142,6 +149,7 @@ public class HololiveChannelSeeder {
             channelMatsuri.setBannerChannel("matsuri-channel-banner.jpg");
             channelMatsuri.setVtuber(true);
             channelMatsuri.setHololive(true);
+            channelMatsuri.setEnableChannel(true);
             channelRepo.save(channelMatsuri);
             result.add(channelMatsuri);
 
@@ -157,6 +165,7 @@ public class HololiveChannelSeeder {
             channelAkiRose.setBannerChannel("aki-channel-banner.jpg");
             channelAkiRose.setVtuber(true);
             channelAkiRose.setHololive(true);
+            channelAkiRose.setEnableChannel(true);
             channelRepo.save(channelAkiRose);
             result.add(channelAkiRose);
 
@@ -173,8 +182,10 @@ public class HololiveChannelSeeder {
             channelMel.setSubscribe(900000);
             channelMel.setThumbnailChannel("mel-channel-thumbnail.jpg");
             channelMel.setBannerChannel("mel-channel-banner.jpg");
+            channelMel.setLockUpdate(true);
             channelMel.setVtuber(true);
             channelMel.setHololive(true);
+            channelMel.setEnableChannel(true);
             channelRepo.save(channelMel);
             result.add(channelMel);
 
@@ -190,6 +201,7 @@ public class HololiveChannelSeeder {
             channelFubuki.setBannerChannel("fubuki-channel-banner.jpg");
             channelFubuki.setVtuber(true);
             channelFubuki.setHololive(true);
+            channelFubuki.setEnableChannel(true);
             channelRepo.save(channelFubuki);
 
             Channel channelHaachama = new Channel();
@@ -206,6 +218,7 @@ public class HololiveChannelSeeder {
             channelHaachama.setBannerChannel("haato-channel-banner.jpg");
             channelHaachama.setVtuber(true);
             channelHaachama.setHololive(true);
+            channelHaachama.setEnableChannel(true);
             channelRepo.save(channelHaachama);
             result.add(channelHaachama);
 
@@ -222,6 +235,7 @@ public class HololiveChannelSeeder {
             channelAqua.setBannerChannel("aqua-channel-banner.jpg");
             channelAqua.setVtuber(true);
             channelAqua.setHololive(true);
+            channelAqua.setEnableChannel(true);
             channelRepo.save(channelAqua);
             result.add(channelAqua);
 
@@ -237,6 +251,7 @@ public class HololiveChannelSeeder {
             channelChoco.setBannerChannel("choco-channel-banner.jpg");
             channelChoco.setVtuber(true);
             channelChoco.setHololive(true);
+            channelChoco.setEnableChannel(true);
             channelRepo.save(channelChoco);
             result.add(channelChoco);
 
@@ -252,8 +267,43 @@ public class HololiveChannelSeeder {
             channelSubaru.setBannerChannel("subaru-channel-banner.jpg");
             channelSubaru.setVtuber(true);
             channelSubaru.setHololive(true);
+            channelSubaru.setEnableChannel(true);
             channelRepo.save(channelSubaru);
             result.add(channelSubaru);
+
+            Channel channelShion = new Channel();
+            channelShion.setIdChannel("UCXTpFs_3PqI41qX2d9tL2Rw");
+            channelShion.setNameChannelVI("Murasaki Shion - Shion Ch. 紫咲シオン");
+            channelShion.setUrlChannel("https://www.youtube.com/channel/UCXTpFs_3PqI41qX2d9tL2Rw");
+            channelShion.setUrlVideoPresent("https://www.youtube.com/watch?v=ISORcbhkfxM");
+            channelShion.setDescriptionChannelVI("Murasaki Shion là VTuber của Hololive. Cô là thế hệ thứ 2 của Hololive. Cô có tạo hình là một phù thủy. Cô thường xuyên xuất hiện trong các phim ngắn với phép thuật hay gây rắc rối của mình. Nội dung của cô xoay quanh chủ đề NTR.");
+            channelShion.setCreatedDateChannel(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-03"));
+            channelShion.setSubscribe(1120000);
+            channelShion.setThumbnailChannel("shion-channel-thumbnail.jpg");
+            channelShion.setBannerChannel("shion-channel-banner.jpg");
+            channelShion.setVtuber(true);
+            channelShion.setHololive(true);
+            channelShion.setEnableChannel(true);
+            channelRepo.save(channelShion);
+            result.add(channelShion);
+
+            Channel channelAyame = new Channel();
+            channelAyame.setIdChannel("UC7fk0CB07ly8oSl0aqKkqFg");
+            channelAyame.setNameChannelVI("Nakiri Ayame Ch. 百鬼あやめ");
+            channelAyame.setUrlChannel("https://www.youtube.com/channel/UC7fk0CB07ly8oSl0aqKkqFg");
+            channelAyame.setUrlVideoPresent("https://www.youtube.com/watch?v=vm41hDf1sx4&t=0s");
+            channelAyame.setDescriptionChannelVI("Nakiri Ayame là VTuber của Hololive. Cô là thế hệ thứ 2 của Hololive. Cô có tạo hình là một con quỷ Oni. Cô nổi tiếng với bài hát Docchi Docchi tự chế, luôn cười trong buổi stream và có khả năng bắn súng đỉnh cao trong các tựa game FPS.");
+            channelAyame.setCreatedDateChannel(new SimpleDateFormat("yyyy-MM-dd").parse("2018-08-12"));
+            channelAyame.setSubscribe(1500000);
+            channelAyame.setThumbnailChannel("ayame-channel-thumbnail.jpg");
+            channelAyame.setBannerChannel("ayame-channel-banner.jpg");
+            channelAyame.setVtuber(true);
+            channelAyame.setHololive(true);
+            channelAyame.setEnableChannel(true);
+            channelRepo.save(channelAyame);
+            result.add(channelAyame);
+
+            // ============== Gen 3 ==============
 
         } catch (Exception ex) {
             return result;

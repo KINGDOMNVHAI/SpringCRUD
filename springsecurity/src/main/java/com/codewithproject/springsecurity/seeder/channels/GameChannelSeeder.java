@@ -29,6 +29,7 @@ public class GameChannelSeeder {
             channelEpicSkillshot.setSubscribe(600000);
             channelEpicSkillshot.setThumbnailChannel("epicskillshot-channel-thumbnail.jpg");
             channelEpicSkillshot.setBannerChannel("epicskillshot-channel-thumbnail.jpg");
+            channelEpicSkillshot.setEnableChannel(true);
             channelRepo.save(channelEpicSkillshot);
             result.add(channelEpicSkillshot);
 
@@ -42,6 +43,7 @@ public class GameChannelSeeder {
             channelPlayOverwatch.setSubscribe(2950000);
             channelPlayOverwatch.setThumbnailChannel("play-overwatch-channel-thumbnail.jpg");
             channelPlayOverwatch.setBannerChannel("play-overwatch-channel-thumbnail.jpg");
+            channelPlayOverwatch.setEnableChannel(true);
             channelRepo.save(channelPlayOverwatch);
             result.add(channelPlayOverwatch);
 
@@ -55,6 +57,7 @@ public class GameChannelSeeder {
             channelVexsper.setSubscribe(170000);
             channelVexsper.setThumbnailChannel("vexsper-channel-thumbnail.jpg");
             channelVexsper.setBannerChannel("vexsper-channel-thumbnail.jpg");
+            channelVexsper.setEnableChannel(true);
             channelRepo.save(channelVexsper);
             result.add(channelVexsper);
 

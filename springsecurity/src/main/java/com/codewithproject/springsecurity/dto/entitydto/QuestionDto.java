@@ -1,5 +1,6 @@
-package com.codewithproject.springsecurity.dto;
+package com.codewithproject.springsecurity.dto.entitydto;
 
+import com.codewithproject.springsecurity.dto.AnswerQuestionDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,9 @@ import java.util.List;
 @Setter
 public class QuestionDto {
 
-    private String titleQuestion;
+    private Integer seqQuestion;
+
+    private String contentQuestion;
 
     private String listAnswer; // Ex: 1,7,8,10
 

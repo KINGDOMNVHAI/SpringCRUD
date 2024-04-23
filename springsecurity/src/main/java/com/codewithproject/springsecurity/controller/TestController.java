@@ -10,19 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/auth/test")
+@RequestMapping("/api/v1/public/test")
 @RequiredArgsConstructor
 public class TestController {
 
     @Autowired
     private TestServiceImpl testServiceImpl;
 
-    @GetMapping("/{idTest}")
-    public TestQuestionDto getTestByID(@PathVariable Integer idTest) {
+    @GetMapping("/{urlTest}/{lang}")
+    public TestQuestionDto getTestByID(
+            @PathVariable String urlTest,
+            @PathVariable String lang
+    ) {
         TestQuestionDto test = new TestQuestionDto();
         try {
-            test = testServiceImpl.getTest(idTest);
-            return test;
+            return testServiceImpl.getTestQuestion(urlTest, lang);
         } catch (Exception e) {
 
         }

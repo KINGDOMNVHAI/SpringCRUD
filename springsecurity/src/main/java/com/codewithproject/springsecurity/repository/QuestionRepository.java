@@ -24,7 +24,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     @Query(value = "SELECT q.* "
             + " FROM questions q "
-            + " LEFT JOIN test_question tq ON tq.id_question = q.id_question "
-            + " WHERE tq.id_test = :idTest ", nativeQuery = true)
-    List<Question> getQuestionByIdTest(Integer idTest);
+            + " LEFT JOIN tests t ON t.url_test = q.url_test "
+            + " WHERE t.url_test = :urlTest ", nativeQuery = true)
+    List<Question> getQuestionByIdTest(String urlTest);
 }

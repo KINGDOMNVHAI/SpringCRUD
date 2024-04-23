@@ -1,7 +1,7 @@
 package com.codewithproject.springsecurity.entities;
 
 import com.codewithproject.springsecurity.config.Constants;
-import com.codewithproject.springsecurity.dto.VideoDto;
+import com.codewithproject.springsecurity.dto.entitydto.VideoDto;
 import com.codewithproject.springsecurity.util.DateUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

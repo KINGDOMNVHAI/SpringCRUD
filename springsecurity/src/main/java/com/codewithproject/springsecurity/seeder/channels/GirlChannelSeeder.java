@@ -28,6 +28,7 @@ public class GirlChannelSeeder {
             channelMilkFilm.setSubscribe(300000);
             channelMilkFilm.setThumbnailChannel("milkfilm-channel-thumbnail.jpg");
             channelMilkFilm.setBannerChannel("milkfilm-channel-banner.jpg");
+            channelMilkFilm.setEnableChannel(true);
             channelRepo.save(channelMilkFilm);
             result.add(channelMilkFilm);
 
@@ -41,6 +42,7 @@ public class GirlChannelSeeder {
             channelNagi.setSubscribe(36000);
             channelNagi.setThumbnailChannel("nemoto-nagi-channel-thumbnail.jpg");
             channelNagi.setBannerChannel("nemoto-nagi-channel-banner.jpg");
+            channelNagi.setEnableChannel(true);
             channelRepo.save(channelNagi);
             result.add(channelNagi);
 
@@ -54,6 +56,7 @@ public class GirlChannelSeeder {
             channelInfiniHD.setSubscribe(12000000);
             channelInfiniHD.setThumbnailChannel("infini-hd-4k-channel-thumbnail.jpg");
             channelInfiniHD.setBannerChannel("infini-hd-4k-channel-banner.jpg");
+            channelInfiniHD.setEnableChannel(true);
             channelRepo.save(channelInfiniHD);
             result.add(channelInfiniHD);
 

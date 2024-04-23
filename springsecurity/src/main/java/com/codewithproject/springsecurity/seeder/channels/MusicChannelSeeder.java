@@ -41,6 +41,7 @@ public class MusicChannelSeeder {
             channelSyrex.setSubscribe(1870000);
             channelSyrex.setThumbnailChannel("syrex-channel-thumbnail.jpg");
             channelSyrex.setBannerChannel("syrex-channel-banner.jpg");
+            channelSyrex.setEnableChannel(true);
             channelRepo.save(channelSyrex);
             result.add(channelSyrex);
 
@@ -54,6 +55,7 @@ public class MusicChannelSeeder {
             channelPanPiano.setSubscribe(3550000);
             channelPanPiano.setThumbnailChannel("pan-piano-channel-thumbnail.jpg");
             channelPanPiano.setBannerChannel("pan-piano-channel-banner.jpg");
+            channelPanPiano.setEnableChannel(true);
             channelRepo.save(channelPanPiano);
             result.add(channelPanPiano);
 
@@ -67,6 +69,7 @@ public class MusicChannelSeeder {
             channelLunaxHolic.setSubscribe(418);
             channelLunaxHolic.setThumbnailChannel("lunaxholic-channel-thumbnail.jpg");
             channelLunaxHolic.setBannerChannel("lunaxholic-channel-banner.jpg");
+            channelLunaxHolic.setEnableChannel(true);
             channelRepo.save(channelLunaxHolic);
             result.add(channelLunaxHolic);
 

@@ -22,7 +22,10 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_answer", nullable = false)
-    private Long idAnswer;
+    private Integer idAnswer;
+
+    @Column(name = "id_question")
+    private Long idQuestion;
 
     @Column(name = "content_answer_vi")
     private String contentAnswerVI;
@@ -30,9 +33,6 @@ public class Answer {
     @Column(name = "content_answer_en")
     private String contentAnswerEN;
 
-    @Column(name = "id_question")
-    private Long idQuestion;
-
     @Column(name = "result_question")
-    private boolean resultQuestion;
+    private Boolean resultQuestion; // True, False, Null
 }

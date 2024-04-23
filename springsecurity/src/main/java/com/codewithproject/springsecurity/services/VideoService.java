@@ -1,10 +1,8 @@
 package com.codewithproject.springsecurity.services;
 
-import com.codewithproject.springsecurity.config.Constants;
-import com.codewithproject.springsecurity.dto.VideoDto;
+import com.codewithproject.springsecurity.dto.entitydto.VideoDto;
 import com.codewithproject.springsecurity.entities.Video;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface VideoService {
