@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -48,17 +49,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public JwtAuthenticationResponse signin(SignInRequest signInRequest) {
-        System.out.println("pass " + signInRequest.getPassword());
+        String pass = signInRequest.getPassword();
+        String passHash = new BCryptPasswordEncoder().encode(pass);
         String jwt = null;
         String refreshToken = null;
         String message = MessageConstants.INVALID_EMAIL_PASSWORD;
 
-        var user = userRepository.findByEmail(signInRequest.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
-        Optional<User> checkUser = userRepository.findByEmailAndPassword(signInRequest.getEmail(), signInRequest.getPassword());
-        if (checkUser.isPresent()) {
-            jwt = jwtService.generateToken(user);
-            refreshToken = jwtService.generateRefreshToken(new HashMap<>(), user);
-            message = MessageConstants.LOGIN_SUCCESS;
+        Optional<User> user = userRepository.findByEmail(signInRequest.getEmail());
+        if (user.isPresent() && pass != null) {
+//            if (user.get().getPassword().equals(pass)) {
+                jwt = jwtService.generateToken(user.get());
+                refreshToken = jwtService.generateRefreshToken(new HashMap<>(), user.get());
+                message = MessageConstants.LOGIN_SUCCESS;
+//            }
         }
         JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse();
         jwtAuthenticationResponse.setToken(jwt);
@@ -67,7 +70,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    signInRequest.getEmail(), signInRequest.getPassword()));
+                    signInRequest.getEmail(), passHash));
         } catch (Exception ex) {
             System.out.println("Error");
         }

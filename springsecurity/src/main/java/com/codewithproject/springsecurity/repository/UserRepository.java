@@ -19,13 +19,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "TRUNCATE TABLE user", nativeQuery = true)
     void truncateTable();
 
-    Optional<User> findByEmail(String username);
+    Optional<User> findByEmail(String email);
 
     @Query(value = "SELECT id, email, firstname, lastname, role, username, password "
             + " FROM user "
-            + " WHERE email = :email "
-            + " AND password = :password", nativeQuery = true)
-    Optional<User> findByEmailAndPassword(String email, String password);
+            + " WHERE email LIKE :usernameOrEmail "
+            + " OR username LIKE :usernameOrEmail", nativeQuery = true)
+    User getUserByEmail(String usernameOrEmail);
 
     User findByRole(Role role);
 

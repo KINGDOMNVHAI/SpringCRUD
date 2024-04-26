@@ -1,6 +1,7 @@
 package com.codewithproject.springsecurity.entities;
 
 import com.codewithproject.springsecurity.enums.Role;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,16 +30,22 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; // Sau nay doi thanh long
 
+    @Column(name = "firstname", nullable = false)
     private String firstname;
 
+    @Column(name = "lastname", nullable = false)
     private String lastname;
 
+    @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "username", nullable = false)
     private String username;
 
+    @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "role", nullable = false)
     private Role role;
 
     @Override
@@ -49,6 +56,11 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
