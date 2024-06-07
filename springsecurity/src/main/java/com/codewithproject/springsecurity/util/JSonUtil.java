@@ -1,6 +1,7 @@
 package com.codewithproject.springsecurity.util;
 
 import com.codewithproject.springsecurity.dto.entitydto.VideoDto;
+import com.codewithproject.springsecurity.enums.Status;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -74,5 +75,19 @@ public class JSonUtil {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String getStrStatus(Integer status) {
+        String result = "NEW";
+        if (status.equals(Status.NEW.getStatus())) {
+            result = "NEW";
+        } else if (status.equals(Status.PENDING.getStatus())) {
+            result = "PENDING";
+        } else if (status.equals(Status.CANCELLED.getStatus())) {
+            result = "CANCELLED";
+        } else if (status.equals(Status.SUCCESS.getStatus())) {
+            result = "SUCCESS";
+        }
+        return result;
     }
 }
