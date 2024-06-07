@@ -1,0 +1,30 @@
+server:
+  port: 9720
+#  servlet:
+#    context-path: /avatar
+
+spring:
+  h2:
+    console:
+      enabled: false
+      path: /h2-console
+
+datasource:
+  # local
+  url: jdbc:mariadb://localhost:3306/excan013
+  username: root
+  password: 123456
+
+  # stagin
+#  url: jdbc:mariadb://172.25.219.61:3306/excan013
+#  username: dev
+#  password: dbdev
+  driver-class-name: org.mariadb.jdbc.Driver
+
+
+minio:
+  url: http://172.25.219.61:6040/
+  accessKey: 2046KAWetUZYcG8nubg0
+  secretKey: cpxDglli2pZI3KdiIsG1ZdJVi0wgRCFlBwQlK5OJ
+  bucketName: excandev
+
