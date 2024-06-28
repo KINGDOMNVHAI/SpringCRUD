@@ -1,6 +1,7 @@
 package com.codewithproject.springsecurity.services.impl;
 
 import com.codewithproject.springsecurity.config.FileConstants;
+import com.codewithproject.springsecurity.config.MessageConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -37,6 +38,6 @@ public class FileServiceImpl {
         if (uploadType.equals(FileConstants.FILE_TYPE_PDF)) {
             System.out.println(uploadType);
         }
-        return "File uploaded successfully";
+        return MessageConstants.MESS_FILE_UPLOAD_SUCCESS;
     }
 }

@@ -16,5 +16,9 @@ public class MessageConstants {
 
     public static final String MESS_LOGIN_SUCCESS = "Login Successfully!";
 
+    public static final String MESS_FILE_UPLOAD_SUCCESS = "File uploaded successfully";
+
     public static final String MESS_NOT_FOUND = "Login Successfully!";
+
+    public static final String MESS_TYPE_OR_FILE_EMPTY = "type or files is empty!!";
 }
