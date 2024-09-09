@@ -5,8 +5,10 @@ import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Year;
 import java.time.YearMonth;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -38,6 +40,15 @@ public class DateUtil {
 
     public static Date getMaxDate() {
         return DateUtil.toDate(DateUtil.MAX_DATE);
+    }
+
+    public static Integer getThisYear() {
+        return Year.now().getValue();
+    }
+
+    public static Integer getThisMonth() {
+        YearMonth yearMonth = YearMonth.now();
+        return yearMonth.getMonthValue();
     }
 
     public static Date toDate(String dateStr) {
@@ -263,5 +274,19 @@ public class DateUtil {
         else {
             return -1;
         }
+    }
+
+    /**
+     *
+     */
+    public static String getThisYearMonth() {
+        // Get the current YearMonth
+        YearMonth yearMonth = YearMonth.now();
+
+        // Define a DateTimeFormatter for the desired format "yyyy_mm"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM");
+
+        // Format the YearMonth to "yyyy_mm" format
+        return yearMonth.format(formatter);
     }
 }

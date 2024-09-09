@@ -1,7 +1,6 @@
 package com.codewithproject.springsecurity.util;
 
-import com.codewithproject.springsecurity.dto.entitydto.VideoDto;
-import com.codewithproject.springsecurity.enums.Status;
+import com.codewithproject.springsecurity.enums.StatusPayment;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -12,6 +11,10 @@ import java.io.StringWriter;
 public class JSonUtil {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
+
+
+
+
 
     public static String toJSonString(Object o) {
         try {
@@ -27,7 +30,6 @@ public class JSonUtil {
             e.printStackTrace();
             return null;
         }
-
     }
 
     public static String obj2JSon(Object o) {
@@ -44,7 +46,6 @@ public class JSonUtil {
             e.printStackTrace();
             return null;
         }
-
     }
 
     public static <T> T str2bean(String json, Class<T> clazz) {
@@ -67,25 +68,15 @@ public class JSonUtil {
         }
     }
 
-    @SuppressWarnings("rawtypes")
-    public static Object str2list(String json, Class<VideoDto> valueTypeRef) {
-        try {
-            return MAPPER.readValue(json, valueTypeRef);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public static String getStrStatus(Integer status) {
         String result = "NEW";
-        if (status.equals(Status.NEW.getStatus())) {
+        if (status.equals(StatusPayment.NEW.getStatus())) {
             result = "NEW";
-        } else if (status.equals(Status.PENDING.getStatus())) {
+        } else if (status.equals(StatusPayment.PENDING.getStatus())) {
             result = "PENDING";
-        } else if (status.equals(Status.CANCELLED.getStatus())) {
+        } else if (status.equals(StatusPayment.CANCELLED.getStatus())) {
             result = "CANCELLED";
-        } else if (status.equals(Status.SUCCESS.getStatus())) {
+        } else if (status.equals(StatusPayment.SUCCESS.getStatus())) {
             result = "SUCCESS";
         }
         return result;

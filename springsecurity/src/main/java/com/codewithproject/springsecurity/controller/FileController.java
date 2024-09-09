@@ -1,40 +1,53 @@
 package com.codewithproject.springsecurity.controller;
 
-import com.codewithproject.springsecurity.services.impl.FileServiceImpl;
+import com.codewithproject.springsecurity.services.FTPService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collections;
+import java.util.List;
 
-@CrossOrigin(origins = "*")
+
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/public/file")
 @RequiredArgsConstructor
 public class FileController {
 
     @Autowired
-    private FileServiceImpl fileServiceImpl;
+    private FTPService ftpService;
 
-    @PostMapping("/public/blade/upload-image")
-    public Map<String,Object> uploadImageBlade(@RequestParam MultipartFile[] files) throws IOException {
-        Map<String,Object> result = new HashMap<>();
-        String type = "img";
-        if (files == null) {
-            result.put("success", false);
-            result.put("message", "type or files is empty!!");
-            return result;
+
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+
+        String s = ftpService.uploadFile(file);
+        if (s == null) {
+            return ResponseEntity.badRequest().body("Fail");
         }
-        String message = fileServiceImpl.storeFile(type, files);
+        return ResponseEntity.ok("File uploaded successfully: " + s);
 
-        result.put("message", message);
-        return result;
     }
+
+    @PostMapping("/uploads")
+    public ResponseEntity<List<String>> uploadFiles(@RequestParam("files") MultipartFile[] files) {
+
+        List<String> paths = ftpService.uploadFiles(files);
+        if (paths == null) {
+            return ResponseEntity.badRequest().body(Collections.singletonList("Fail"));
+        }
+        return ResponseEntity.ok(paths);
+
+    }
+
+
+//    @PostMapping("/public/line/queue-register")
+//    public Map<String,Object> registerToQueueLine(@RequestBody InsertLineRequest req) {
+//        Map<String,Object> result = new HashMap<>();
+//        result = lineServiceImpl.registerToLine(req);
+//
+//        return result;
+//    }
 }

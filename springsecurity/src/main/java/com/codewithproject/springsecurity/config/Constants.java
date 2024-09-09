@@ -12,8 +12,9 @@ public class Constants {
 
     public final static String PARAM_OFFSET = "offset";
 
-
-
+    public final static String TOTAL_PAGE = "totalPage";
+    public final static String NUM_PAGE = "numPage";
+    public final static String PAGINATION_RESULTS = "pageResults";
 
     public static final String FILTER_ASC = "ASC";
     public static final String FILTER_DESC = "DESC";

@@ -1,19 +1,12 @@
 package com.codewithproject.springsecurity.seeder;
 
-import com.codewithproject.springsecurity.config.ChannelContants;
 import com.codewithproject.springsecurity.entities.Language;
-import com.codewithproject.springsecurity.entities.Video;
 import com.codewithproject.springsecurity.repository.LanguageRepository;
-import com.codewithproject.springsecurity.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileReader;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Component
 public class LanguageSeeder {

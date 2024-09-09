@@ -1,5 +1,7 @@
 package com.codewithproject.springsecurity.services.impl;
 
+import com.codewithproject.springsecurity.dto.request.SearchUserRequest;
+import com.codewithproject.springsecurity.dto.response.UserDetailResponse;
 import com.codewithproject.springsecurity.entities.User;
 import com.codewithproject.springsecurity.repository.UserRepository;
 import com.codewithproject.springsecurity.seeder.UserSeeder;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -43,5 +46,39 @@ public class UserServiceImpl implements UserService {
                         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
             }
         };
+    }
+
+    @Override
+    public UserDetailResponse getUserProfile(SearchUserRequest req) {
+        UserDetailResponse result = new UserDetailResponse();
+        if (!req.getEmail().isEmpty()) {
+            Optional<User> op = getUserDetail(req.getEmail());
+            if (op.isPresent()) {
+                User u = op.get();
+                result.setFirstname(u.getFirstname());
+                result.setLastname(u.getLastname());
+                result.setUsername(u.getUsername());
+                result.setEmail(u.getEmail());
+                result.setPhone(u.getPhone());
+                result.setAddressShip(u.getAddressShip());
+                result.setRole(u.getRole());
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public Optional<User> getUserDetail(String emailOrUsername) {
+        return userRepo.getUserByEmailOrUsername(emailOrUsername);
+    }
+
+    @Override
+    public String getUserFullname(String email) {
+        String name = "";
+        Optional<User> user = userRepo.getUserByEmailOrUsername(email);
+        if (user.isPresent()) {
+            name = user.get().getLastname() + " " + user.get().getFirstname();
+        }
+        return name;
     }
 }
