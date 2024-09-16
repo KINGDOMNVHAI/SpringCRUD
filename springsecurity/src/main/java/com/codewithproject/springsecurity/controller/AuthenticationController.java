@@ -40,9 +40,6 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @Value("${spring.security.oauth2.client.registration.google.client-id}")
-    private String CLIENT_ID;
-
     @PostMapping("/signup")
     public ResponseEntity<User> signup(@RequestBody SignUpRequest signUpRequest) {
         System.out.println(signUpRequest.getEmail());

@@ -23,12 +23,12 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
+@Table(name = "tb_bb_user")
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id; // Sau nay doi thanh long
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "firstname", nullable = false)
     private String firstname;
@@ -47,6 +47,12 @@ public class User implements UserDetails {
 
     @Column(name = "role", nullable = false)
     private Role role;
+
+    @Column(name = "phone", nullable = false)
+    private String phone;
+
+    @Column(name = "address_ship", nullable = false)
+    private String addressShip;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

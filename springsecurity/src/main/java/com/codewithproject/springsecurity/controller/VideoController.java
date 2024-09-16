@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/public/video")
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class VideoController {
 
     @Autowired
     private VideoServiceImpl videoServiceImpl;
 
-    @GetMapping("/{idVideo}")
+    @GetMapping("/public/video/{idVideo}")
     public VideoDto getVideoByID(@PathVariable String idVideo) {
         VideoDto video = new VideoDto();
         try {
@@ -34,7 +34,7 @@ public class VideoController {
         return video;
     }
 
-    @PostMapping("/insert")
+    @PostMapping("/public/video/insert")
     public VideoDto insertVideo(@RequestBody Map<String, Object> request) {
         VideoDto video = new VideoDto();
         Gson g = new Gson();

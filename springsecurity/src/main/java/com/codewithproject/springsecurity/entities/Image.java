@@ -1,20 +1,13 @@
 package com.codewithproject.springsecurity.entities;
 
 import com.codewithproject.springsecurity.dto.entitydto.ImageDto;
-import com.codewithproject.springsecurity.dto.entitydto.LineProgressDto;
-import com.codewithproject.springsecurity.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Getter

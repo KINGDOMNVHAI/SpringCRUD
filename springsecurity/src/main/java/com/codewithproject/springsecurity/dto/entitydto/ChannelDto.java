@@ -1,7 +1,9 @@
 package com.codewithproject.springsecurity.dto.entitydto;
 
+import com.codewithproject.springsecurity.dto.response.BladeListResponse;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
 @Getter
 @Setter
@@ -33,4 +35,12 @@ public class ChannelDto {
 
     private String twitterChannel;
 
+    public ChannelDto toDomain() {
+        ChannelDto entity = new ChannelDto();
+        BeanUtils.copyProperties(this, entity);
+
+//        entity.setBladeFullName(this.getBladeName() != null ? this.bladeName : null);
+
+        return entity;
+    }
 }

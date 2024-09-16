@@ -18,14 +18,11 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Encryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
@@ -41,7 +38,7 @@ import java.util.Optional;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository userRepo;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -63,7 +60,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setUsername(signUpRequest.getSecondname());
         user.setRole(Role.USER);
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
-        return userRepository.save(user);
+        return userRepo.save(user);
     }
 
     public JwtAuthenticationResponse signin(SignInRequest signInRequest) {
@@ -78,7 +75,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String refreshToken = null;
         String message = MessageConstants.MESS_INVALID_EMAIL_PASSWORD;
 
-        Optional<User> user = userRepository.getUserByEmailOrUsername(signInRequest.getEmailOrUsername());
+        Optional<User> user = userRepo.getUserByEmailOrUsername(signInRequest.getEmailOrUsername());
         if (user.isPresent() && !pass.isEmpty()) {
             User dto = user.get();
             if (dto.getPassword().equals(passMD5)) {
@@ -160,7 +157,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String refreshToken = null;
         String message = MessageConstants.MESS_INVALID_EMAIL_PASSWORD;
 
-        Optional<User> user = userRepository.getUserByEmailOrUsername(email);
+        Optional<User> user = userRepo.getUserByEmailOrUsername(email);
         User userNew;
         if (user.isPresent()) {
             userNew = user.get();
@@ -176,7 +173,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             //TODO: FIX PASSWORD
             userNew.setPassword("GOOGLE_LOGIN");
             try{
-                userRepository.save(userNew);
+                userRepo.save(userNew);
             }catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -200,7 +197,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     public JwtAuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
         String userEmail = jwtService.extractUserName(refreshTokenRequest.getToken());
-        User user = userRepository.findByEmail(userEmail).orElseThrow();
+        User user = userRepo.findByEmail(userEmail).orElseThrow();
         if (jwtService.isTokenValid(refreshTokenRequest.getToken(), user)) {
             var jwt = jwtService.generateToken(user);
             JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse();

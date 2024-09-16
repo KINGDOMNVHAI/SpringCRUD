@@ -5,6 +5,7 @@ import com.codewithproject.springsecurity.config.Constants;
 import com.codewithproject.springsecurity.dto.CommunityDto;
 import com.codewithproject.springsecurity.dto.entitydto.ChannelDto;
 import com.codewithproject.springsecurity.entities.Channel;
+import com.codewithproject.springsecurity.logic.ChannelLogic;
 import com.codewithproject.springsecurity.repository.ChannelRepository;
 import com.codewithproject.springsecurity.repository.CommunityRepository;
 import com.codewithproject.springsecurity.seeder.ChannelSeeder;
@@ -12,6 +13,7 @@ import com.codewithproject.springsecurity.services.ChannelService;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,6 +45,9 @@ public class ChannelServiceImpl implements ChannelService {
     private ChannelSeeder channelSeeder;
 
     @Autowired
+    private ChannelLogic channelLogic;
+
+    @Autowired
     private RestTemplate restTemplate;
 
     @Value("${youtube.api.key}")
@@ -61,16 +66,20 @@ public class ChannelServiceImpl implements ChannelService {
     }
 
     public List<ChannelDto> getListChannels(Integer limit, String filter) {
-        List<ChannelDto> result = new ArrayList<>();
-        List<Channel> listChannel = channelRepo.getListChannels();
-        if (!listChannel.isEmpty()) {
-            result = listChannel.stream().map(c -> {
-                ChannelDto dto = new ChannelDto();
-                c.convertToDto(dto, Constants.LANG_VI);
-                return dto;
+        List<ChannelDto> listResult = new ArrayList<>();
+
+        TypedQuery<ChannelDto> tqChannel = channelLogic.retrieveListChannel(null);
+        List<ChannelDto> listDto = tqChannel.getResultList();
+
+        if (!listDto.isEmpty()) {
+            listResult = listDto.stream().map(item -> {
+                ChannelDto data = new ChannelDto();
+                data = item.toDomain();
+//                c.convertToDto(dto, Constants.LANG_VI);
+                return data;
             }).collect(Collectors.toList());
         }
-        return result;
+        return listResult;
     }
 
     public List<CommunityDto> getListCommunityByIDChannel(String idChannel) {
