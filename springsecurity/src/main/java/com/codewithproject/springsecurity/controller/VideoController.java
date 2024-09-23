@@ -44,16 +44,10 @@ public class VideoController {
                 String json = JSonUtil.toJSonString(videoObj);
                 video = g.fromJson(json, VideoDto.class);
             }
-            videoServiceImpl.insertVideo(video);
+            return videoServiceImpl.insertVideo(video);
         } catch (Exception e) {
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
         return video;
     }
-
-//    @GetMapping("/welcome-client")
-//    public int greetMessage() {
-//        String a = "";
-//        return a.length();
-//    }
 }

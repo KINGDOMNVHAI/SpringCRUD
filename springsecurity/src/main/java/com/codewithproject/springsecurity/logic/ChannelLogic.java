@@ -1,6 +1,7 @@
 package com.codewithproject.springsecurity.logic;
 
 import com.codewithproject.springsecurity.dto.entitydto.ChannelDto;
+import com.codewithproject.springsecurity.dto.logic.ChannelVideoLogicStore;
 import com.codewithproject.springsecurity.entities.Channel;
 import com.codewithproject.springsecurity.repository.ChannelRepository;
 import com.codewithproject.springsecurity.store.ChannelStore;
@@ -36,20 +37,30 @@ public class ChannelLogic {
         return channelRepo.count();
     }
 
-    public TypedQuery<ChannelDto> retrieveListChannel(String idChannel) {
+    public TypedQuery<ChannelDto> retrieveListChannel(ChannelVideoLogicStore req) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<ChannelDto> bladeEntityQuery = builder.createQuery(ChannelDto.class);
         Root<Channel> channelRoot = bladeEntityQuery.from(Channel.class);
 
         // build all the selected column
         CompoundSelection<ChannelDto> compoundSelection = builder.construct(ChannelDto.class,
-                channelRoot.get("idChannel").alias("idChannel"),
-                channelRoot.get("urlChannel").alias("urlChannel")
+            channelRoot.get("idChannel").alias("idChannel"),
+            channelRoot.get("nameChannel").alias("nameChannel"),
+            channelRoot.get("urlChannel").alias("urlChannel"),
+            channelRoot.get("urlVideoPresent").alias("urlVideoPresent"),
+            channelRoot.get("descriptionChannel").alias("descriptionChannel"),
+            channelRoot.get("createdDateChannel").alias("createdDateChannel"),
+            channelRoot.get("subscribe").alias("subscribe"),
+            channelRoot.get("thumbnailChannel").alias("thumbnailChannel"),
+            channelRoot.get("subscribe").alias("subscribe"),
+            channelRoot.get("websiteChannel").alias("websiteChannel"),
+            channelRoot.get("facebookChannel").alias("facebookChannel"),
+            channelRoot.get("twitterChannel").alias("twitterChannel")
         );
         bladeEntityQuery.select(compoundSelection);
         bladeEntityQuery.distinct(true);
 
-        List<Predicate> listPredicates = store.buildPredicateListChannel(builder, channelRoot, idChannel);
+        List<Predicate> listPredicates = store.buildPredicateListChannel(builder, channelRoot, req);
         bladeEntityQuery.where(listPredicates.toArray(new Predicate[0]));
 
         return entityManager.createQuery(bladeEntityQuery);

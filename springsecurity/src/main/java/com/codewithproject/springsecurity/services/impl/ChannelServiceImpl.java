@@ -4,6 +4,7 @@ import com.codewithproject.springsecurity.config.ChannelContants;
 import com.codewithproject.springsecurity.config.Constants;
 import com.codewithproject.springsecurity.dto.CommunityDto;
 import com.codewithproject.springsecurity.dto.entitydto.ChannelDto;
+import com.codewithproject.springsecurity.dto.logic.ChannelVideoLogicStore;
 import com.codewithproject.springsecurity.entities.Channel;
 import com.codewithproject.springsecurity.logic.ChannelLogic;
 import com.codewithproject.springsecurity.repository.ChannelRepository;
@@ -68,7 +69,8 @@ public class ChannelServiceImpl implements ChannelService {
     public List<ChannelDto> getListChannels(Integer limit, String filter) {
         List<ChannelDto> listResult = new ArrayList<>();
 
-        TypedQuery<ChannelDto> tqChannel = channelLogic.retrieveListChannel(null);
+        ChannelVideoLogicStore req = new ChannelVideoLogicStore();
+        TypedQuery<ChannelDto> tqChannel = channelLogic.retrieveListChannel(req);
         List<ChannelDto> listDto = tqChannel.getResultList();
 
         if (!listDto.isEmpty()) {

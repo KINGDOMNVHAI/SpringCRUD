@@ -2,10 +2,13 @@ package com.codewithproject.springsecurity.services.impl;
 
 import com.codewithproject.springsecurity.config.Constants;
 import com.codewithproject.springsecurity.dto.entitydto.VideoDto;
+import com.codewithproject.springsecurity.dto.logic.ChannelVideoLogicStore;
 import com.codewithproject.springsecurity.entities.Video;
+import com.codewithproject.springsecurity.logic.VideoLogic;
 import com.codewithproject.springsecurity.repository.VideoRepository;
 import com.codewithproject.springsecurity.seeder.VideoSeeder;
 import com.codewithproject.springsecurity.services.VideoService;
+import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,9 @@ import static com.codewithproject.springsecurity.config.ParamConstants.PARAM_KEY
 public class VideoServiceImpl implements VideoService {
 
     @Autowired
+    public VideoLogic videoLogic;
+
+    @Autowired
     public VideoRepository videoRepo;
 
     @Autowired
@@ -34,6 +40,10 @@ public class VideoServiceImpl implements VideoService {
         Video video = new Video();
         video = videoRepo.getVideoById(idVideo);
 
+        ChannelVideoLogicStore req = new ChannelVideoLogicStore();
+        req.setIdVideo(idVideo);
+        TypedQuery<VideoDto> tqVideo = videoLogic.retrieveLineFindVideo(req);
+
         VideoDto result = new VideoDto();
         video.convertToDto(result, Constants.LANG_VI);
         return result;
@@ -42,12 +52,15 @@ public class VideoServiceImpl implements VideoService {
     public List<Video> getListVideoByIdChannel(String idChannel) {
         List<Video> listVideo = new ArrayList<>();
         listVideo = videoRepo.getListVideoByIdChannel(idChannel);
+
+        ChannelVideoLogicStore req = new ChannelVideoLogicStore();
+        req.setIdChannel(idChannel);
+        TypedQuery<VideoDto> tqVideo = videoLogic.retrieveLineFindVideo(req);
+
         return listVideo;
     }
 
-    public void insertVideo(VideoDto request) {
-        Video video = new Video();
-        video = request.convertToEntity(Constants.LANG_VI);
-        videoRepo.save(video);
+    public VideoDto insertVideo(VideoDto req) {
+        return videoLogic.save(req);
     }
 }

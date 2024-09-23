@@ -1,6 +1,8 @@
 package com.codewithproject.springsecurity.logic;
 
+import com.codewithproject.springsecurity.config.Constants;
 import com.codewithproject.springsecurity.dto.entitydto.VideoDto;
+import com.codewithproject.springsecurity.dto.logic.ChannelVideoLogicStore;
 import com.codewithproject.springsecurity.entities.Video;
 import com.codewithproject.springsecurity.repository.VideoRepository;
 import com.codewithproject.springsecurity.store.VideoStore;
@@ -39,7 +41,14 @@ public class VideoLogic {
 //        return lineRepo.get(brandCD);
 //    }
 
-    public TypedQuery<VideoDto> retrieveLineFindVideo(String idVideo) {
+    public VideoDto save(VideoDto req) {
+        Video jpoToSave = new Video();
+        jpoToSave = req.convertToEntity(Constants.LANG_VI);
+        Video savedJpo = videoRepo.save(jpoToSave);
+        return savedJpo.toDomain();
+    }
+
+    public TypedQuery<VideoDto> retrieveLineFindVideo(ChannelVideoLogicStore req) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<VideoDto> lineEntityQuery = builder.createQuery(VideoDto.class);
         Root<Video> videoRoot = lineEntityQuery.from(Video.class);
@@ -47,12 +56,13 @@ public class VideoLogic {
         // build all the selected column
         CompoundSelection<VideoDto> compoundSelection = builder.construct(VideoDto.class,
                 videoRoot.get("idVideo").alias("idVideo"),
-                videoRoot.get("thumbnailVideo").alias("thumbnailVideo")
+                videoRoot.get("thumbnailVideo").alias("thumbnailVideo"),
+                videoRoot.get("idChannel").alias("idChannel")
         );
         lineEntityQuery.select(compoundSelection);
         lineEntityQuery.distinct(true);
 
-        List<Predicate> listPredicates = store.buildPredicateFindVideo(builder, videoRoot, idVideo);
+        List<Predicate> listPredicates = store.buildPredicateFindVideo(builder, videoRoot, req);
         lineEntityQuery.where(listPredicates.toArray(new Predicate[0]));
 
         return entityManager.createQuery(lineEntityQuery);

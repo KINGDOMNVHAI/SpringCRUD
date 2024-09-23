@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
 import java.util.Date;
 
@@ -85,5 +86,11 @@ public class Video {
             dto.setNameVideoVI(this.getNameVideoVI());
             dto.setDescriptionVideoVI(this.getDescriptionVideoVI());
         }
+    }
+
+    public VideoDto toDomain() {
+        VideoDto entity = new VideoDto();
+        BeanUtils.copyProperties(this, entity);
+        return entity;
     }
 }
