@@ -2,15 +2,17 @@ package com.codewithproject.springsecurity.feature.service.impl;
 
 import com.codewithproject.springsecurity.config.ChannelContants;
 import com.codewithproject.springsecurity.config.Constants;
+import com.codewithproject.springsecurity.config.ParamConstants;
 import com.codewithproject.springsecurity.dto.CommunityDto;
 import com.codewithproject.springsecurity.dto.entitydto.ChannelDto;
 import com.codewithproject.springsecurity.dto.logic.ChannelVideoLogicStore;
 import com.codewithproject.springsecurity.entities.Channel;
+import com.codewithproject.springsecurity.feature.service.ChannelService;
 import com.codewithproject.springsecurity.logic.ChannelLogic;
 import com.codewithproject.springsecurity.repository.ChannelRepository;
 import com.codewithproject.springsecurity.repository.CommunityRepository;
 import com.codewithproject.springsecurity.seeder.ChannelSeeder;
-import com.codewithproject.springsecurity.feature.service.ChannelService;
+import com.codewithproject.springsecurity.util.PaginationUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -26,11 +28,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static com.codewithproject.springsecurity.config.ParamConstants.PARAM_KEYWORD;
 
 @Service
 @RequiredArgsConstructor
@@ -57,12 +58,12 @@ public class ChannelServiceImpl implements ChannelService {
     @Value("${youtube.api.channels}")
     private String apiChannels;
 
-    public void truncateLanguages() {
+    public void truncateChannels() {
         channelRepo.truncateTable();
     }
 
     public List<Channel> seederChannels() {
-        truncateLanguages();
+        truncateChannels();
         return channelSeeder.seederChannels();
     }
 
@@ -175,20 +176,43 @@ public class ChannelServiceImpl implements ChannelService {
         return subCount;
     }
 
-    public List<ChannelDto> searchListVideo(Map<String, Object> param) {
-        String keyword = param.get(PARAM_KEYWORD).toString();
-        List<ChannelDto> result = new ArrayList<>();
-        List<Channel> listChannel = new ArrayList<>();
-        listChannel = channelRepo.searchListVideo(keyword);
+    public Map<String, Object> searchListVideo(Map<String, Object> param) {
+        Map<String, Object> resultMap = new HashMap<>();
+        String keyword = param.get(ParamConstants.PARAM_KEYWORD).toString();
+        Integer pageSize = (Integer) param.get(Constants.PARAM_LIMIT);
+        Integer numPage = (Integer) param.get(Constants.PARAM_OFFSET);
 
+        List<Channel> listChannel = channelRepo.searchListVideo(keyword);
+        List<ChannelDto> result = new ArrayList<>();
         if (!listChannel.isEmpty()) {
             result = listChannel.stream().map(c -> {
                 ChannelDto dto = new ChannelDto();
                 c.convertToDto(dto, param.get(Constants.LANGUAGE_ID).toString());
                 return dto;
             }).collect(Collectors.toList());
+
+            if (result.size() <= pageSize) {
+                resultMap.put(Constants.PAGINATION_RESULTS, result);
+                resultMap.put(Constants.NUM_PAGE, 1);
+                resultMap.put(Constants.TOTAL_PAGE, 1);
+                resultMap.put(Constants.TOTAL_RESULTS, result.size());
+                return resultMap;
+            }
+
+            List<ChannelDto> pResult = PaginationUtil.paginate(result, pageSize, numPage);
+            int totalPages = PaginationUtil.getTotalPages(result, pageSize);
+
+            resultMap.put(Constants.PAGINATION_RESULTS, pResult);
+            resultMap.put(Constants.NUM_PAGE, numPage);
+            resultMap.put(Constants.TOTAL_PAGE, totalPages);
+            resultMap.put(Constants.TOTAL_RESULTS, result.size());
+            return resultMap;
         }
 
-        return result;
+        resultMap.put(Constants.PAGINATION_RESULTS, result);
+        resultMap.put(Constants.NUM_PAGE, 1);
+        resultMap.put(Constants.TOTAL_PAGE, 1);
+        resultMap.put(Constants.TOTAL_RESULTS, result.size());
+        return resultMap;
     }
 }

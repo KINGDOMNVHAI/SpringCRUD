@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,19 +54,13 @@ public class ChannelController {
     }
 
     @PostMapping("/public/channel/search")
-    public List<ChannelDto> searchChannel(@RequestBody Map<String, Object> param) {
-//        HashMap<String, Object> param = new HashMap<>();
+    public Map<String, Object> searchChannel(@RequestBody Map<String, Object> param) {
+        Map<String, Object> resultMap = new HashMap<>();
         int languageId = Constants.DEFAULT_LANGUAGE;
         param.put(Constants.LANGUAGE_ID, languageId);
         param.put(Constants.PARAM_OFFSET, 0);
-        param.put(Constants.PARAM_LIMIT, 5);
-        List<ChannelDto> listVideo = new ArrayList<>();
-        try {
-            listVideo = channelsServiceImpl.searchListVideo(param);
-        } catch (Exception e) {
-
-        }
-        return listVideo;
+        param.put(Constants.PARAM_LIMIT, Constants.PAGE_SIZE);
+        return channelsServiceImpl.searchListVideo(param);
     }
 
     @GetMapping("/public/channel/community/get-all/{idChannel}")

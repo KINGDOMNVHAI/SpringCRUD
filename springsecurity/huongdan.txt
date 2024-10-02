@@ -151,3 +151,9 @@ question-service: table test, question
 Cách fix Refresh Token:
 https://www.youtube.com/watch?v=EsVybSJr7zU
 https://github.com/ali-bouali/spring-boot-3-jwt-security
+
+============
+Luồng chạy:
+API Controller
+-> Service: phân trang, truyền request
+-> Logic: xử lý SQL, repository, CriteriaBuilder...
