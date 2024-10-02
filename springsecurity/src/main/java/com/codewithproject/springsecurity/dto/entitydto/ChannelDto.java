@@ -1,6 +1,5 @@
 package com.codewithproject.springsecurity.dto.entitydto;
 
-import com.codewithproject.springsecurity.dto.response.BladeListResponse;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;

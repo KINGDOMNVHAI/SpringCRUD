@@ -1,7 +1,7 @@
 package com.codewithproject.springsecurity.config;
 
-import com.codewithproject.springsecurity.services.JWTService;
-import com.codewithproject.springsecurity.services.UserService;
+import com.codewithproject.springsecurity.feature.service.JWTService;
+import com.codewithproject.springsecurity.feature.service.UserService;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

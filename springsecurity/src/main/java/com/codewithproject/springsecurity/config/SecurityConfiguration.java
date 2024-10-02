@@ -1,7 +1,7 @@
 package com.codewithproject.springsecurity.config;
 
 import com.codewithproject.springsecurity.enums.Role;
-import com.codewithproject.springsecurity.services.UserService;
+import com.codewithproject.springsecurity.feature.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
